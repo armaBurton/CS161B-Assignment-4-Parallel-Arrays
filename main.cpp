@@ -9,5 +9,8 @@ int main()
     welcome();
     readInput(courseNums, students, count);
 
+    cout << "List of course and students:\n";
+    printList(courseNums, students, count);
+
     return 0;
 }

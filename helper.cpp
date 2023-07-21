@@ -8,20 +8,22 @@ void readInput(char courseNums[][MAXCHAR], int students[], int &count){
     char temp[REALLY_BIG_NUMBER];
     size_t tempLength;
     bool loopState, isEmpty;
+    int limit {};
 
     cout << "Enter course number and students enrolled when prompted.\n"
          << "Enter 'Quit' or 'quit' for course number when you are done.\n";
 
   
     do{
-        loopState = false;
+        loopState = true;
         cout << "Enter course number: ";
         cin.get(temp, REALLY_BIG_NUMBER);
         tempLength = strlen(temp);
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-      
-        cout << temp << " " << tempLength << endl;
-        if(tempLength > MAXCHAR){
+
+         if (!strcmp(temp, "quit") || !strcmp(temp, "Quit")){
+            loopState = false;
+        } else if(tempLength > MAXCHAR){
             cout << "Input exceeds bounds.\n";
             loopState = true;
         } else if (tempLength == 0){
@@ -34,8 +36,8 @@ void readInput(char courseNums[][MAXCHAR], int students[], int &count){
             readInt("Number of student enrolled: ", students[count]);
             count++;
         }
-
-    }while(loopState);
+        limit++;
+    }while(loopState && limit < MAXCOURSE);
 }
 
 void readInt(const char prompt[], int &num){
@@ -47,7 +49,6 @@ void readInt(const char prompt[], int &num){
     cout << prompt;
     do{
         loopState = false;
-        // cin.getline(temp, MAXCAPACITY);
 
         cin >> num;
         if (cin.fail()){
@@ -59,11 +60,14 @@ void readInt(const char prompt[], int &num){
             cout << "Input is out of bounds. Please enter a number betewen 0 and 25: ";
             loopState = true;
         }
+        cin.ignore();
     }while(loopState);
 }
 
 void printList(char courseNums[][MAXCHAR], int students[], int count){
-
+    for (int i = 0; i < count; i++){
+        cout << courseNums[i] << '\t' << students[i] << endl;
+    }
 }
 
 void cancelCourses(char courseNums[][MAXCHAR], int students[], int count){
