@@ -19,12 +19,6 @@ void readInput(char courseNums[][MAXCHAR], int students[], int &count){
         cin.get(temp, REALLY_BIG_NUMBER);
         tempLength = strlen(temp);
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-        for (size_t i = 0; i < tempLength; ++i){
-            if (!isspace(static_cast<unsigned char>(temp[i]))){
-                isEmpty = true;
-            }
-        }
       
         cout << temp << " " << tempLength << endl;
         if(tempLength > MAXCHAR){
@@ -35,13 +29,17 @@ void readInput(char courseNums[][MAXCHAR], int students[], int &count){
             loopState = true;
             cin.clear();
             cin.ignore();
+        } else {
+            strcpy(courseNums[count], temp);
+            readInt("Number of student enrolled: ", students[count]);
+            count++;
         }
 
     }while(loopState);
 }
 
 void readInt(const char prompt[], int &num){
-
+    cout << prompt << " " << num << endl;
 }
 
 void printList(char courseNums[][MAXCHAR], int students[], int count){
