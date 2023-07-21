@@ -1,9 +1,31 @@
 #include "helper.h"
 
+//Name:   welcome()
+//Desc:   This function displays the welcome prompt
+//input:  None
+//output: prompt
+//return: void
 void welcome(){
     cout << "Welcome to my Course Rosters program!!\n";
 }
 
+//Name:   readInput()
+/*Desc:   This function reads data from the user the first input is a 
+          cstring and stores the length in the tempLength variable
+          if temp is == to 'quit' or 'Quit' loopstate is set to false, and 
+          the program exits.
+
+          If tempLength > MAXCHAR user is notified and loopState is set to true
+          If tempLength = 0 user is notified and loopState is set to true
+          ELSE
+          copy temp into the current index of courseNums[] then
+          call readInt
+          increment count, increment limit
+          use limit to stop do/while loop when limit == MAXCOURSE
+*/
+//input:  char
+//output: prompt
+//return: void
 void readInput(char courseNums[][MAXCHAR], int students[], int &count){
     char temp[REALLY_BIG_NUMBER];
     size_t tempLength;
@@ -39,6 +61,15 @@ void readInput(char courseNums[][MAXCHAR], int students[], int &count){
     }while(loopState && limit < MAXCOURSE);
 }
 
+//Name:   readInt()
+/*Desc:   This function reads in integer from the user
+          If cin.fail() user is notified and loopState is set to true
+          input stream is cleared and remaining characters are ignored.
+          If num < 0 or > 25 User is notified and loopState is set to true
+*/
+//input:  int
+//output: prompt
+//return: void
 void readInt(const char prompt[], int &num){
     bool loopState;
     char temp[MAXCAPACITY];
@@ -62,20 +93,32 @@ void readInt(const char prompt[], int &num){
     }while(loopState);
 }
 
+//Name:   printList()
+//Desc:   This function displays the courseNums[] and students[] lists in parallel
+//input:  None
+//output: prompt
+//return: void
 void printList(char courseNums[][MAXCHAR], int students[], int count){
     for (int i = 0; i < count; i++){
         cout << courseNums[i] << '\t' << students[i] << endl;
     }
 }
 
+//Name:   cancelCourses()
+/*Desc:   This function loops through the students[] list and if an index is < 10
+          it removes it from the list as well as removing the corrisponding index
+          from courseNums[]. 
+          It then decrements count.
+*/
+//input:  None
+//output: none
+//return: void
 void cancelCourses(char courseNums[][MAXCHAR], int students[], int &count){
     for (int i = 0; i < count; i++){
         if(students[i] < 10){
             for(int j = i; j < count; j++){
                 students[j] = students[j + 1];
                 strcpy(courseNums[j], courseNums[j + 1]);
-                // students[count - 1] = '\0';
-                // strcpy(courseNums[j - 1], '\0');
             }
             --count;
             i--;
