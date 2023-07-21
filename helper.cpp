@@ -7,38 +7,36 @@ void welcome(){
 void readInput(char courseNums[][MAXCHAR], int students[], int &count){
     char temp[REALLY_BIG_NUMBER];
     size_t tempLength;
-    bool loopState;
+    bool loopState, isEmpty;
 
     cout << "Enter course number and students enrolled when prompted.\n"
          << "Enter 'Quit' or 'quit' for course number when you are done.\n";
-        
+
+  
     do{
         loopState = false;
-        // memset(temp, '\0', sizeof(temp));
         cout << "Enter course number: ";
-        // cin.get(temp, '\n');
-        cin >> temp;
-        cin.ignore('\n');
+        cin.get(temp, REALLY_BIG_NUMBER);
         tempLength = strlen(temp);
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
+        for (size_t i = 0; i < tempLength; ++i){
+            if (!isspace(static_cast<unsigned char>(temp[i]))){
+                isEmpty = true;
+            }
+        }
+      
+        cout << temp << " " << tempLength << endl;
         if(tempLength > MAXCHAR){
             cout << "Input exceeds bounds.\n";
             loopState = true;
+        } else if (tempLength == 0){
+            cout << "Null input.\n";
+            loopState = true;
+            cin.clear();
+            cin.ignore();
         }
 
-        // if (tempLength > MAXCHAR){
-        //     cout << "Input exceeds bounds.\n";
-        // } else if (tempLength == 0){
-        //     cout << "Null input.\n";
-        //     cin.ignore();
-        // } else {
-        //     strcpy(courseNums[count], temp);
-        //     cout << courseNums[count] << endl;
-        //     readInt("Number of students enrolled: ", students[count]);
-        //     count++;
-        // }
-        // memset(temp, 0, sizeof(temp));
-        // cout << temp << endl;
     }while(loopState);
 }
 
