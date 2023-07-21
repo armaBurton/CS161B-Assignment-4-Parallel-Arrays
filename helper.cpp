@@ -39,7 +39,25 @@ void readInput(char courseNums[][MAXCHAR], int students[], int &count){
 }
 
 void readInt(const char prompt[], int &num){
-    cout << prompt << " " << num << endl;
+    bool loopState;
+    char temp[MAXCAPACITY];
+    int counter;
+
+
+    cout << prompt;
+    do{
+        loopState = false;
+        // cin.getline(temp, MAXCAPACITY);
+
+        cin >> num;
+        if (cin.fail()){
+            cout << "Data-type mismatch. Please enter a number between 0 and 25: ";
+            loopState = true;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+    }while(loopState);
 }
 
 void printList(char courseNums[][MAXCHAR], int students[], int count){

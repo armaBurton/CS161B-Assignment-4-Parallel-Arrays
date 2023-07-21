@@ -3,6 +3,9 @@
 #include <iomanip>
 #include <cstring>
 #include <limits>
+#include <cctype>
+#include <stdio.h>
+#include <string.h>
 
 using namespace std;
 
