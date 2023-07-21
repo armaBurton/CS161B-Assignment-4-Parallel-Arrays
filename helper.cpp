@@ -13,7 +13,6 @@ void readInput(char courseNums[][MAXCHAR], int students[], int &count){
     cout << "Enter course number and students enrolled when prompted.\n"
          << "Enter 'Quit' or 'quit' for course number when you are done.\n";
 
-  
     do{
         loopState = true;
         cout << "Enter course number: ";
@@ -45,7 +44,6 @@ void readInt(const char prompt[], int &num){
     char temp[MAXCAPACITY];
     int counter;
 
-
     cout << prompt;
     do{
         loopState = false;
@@ -70,6 +68,17 @@ void printList(char courseNums[][MAXCHAR], int students[], int count){
     }
 }
 
-void cancelCourses(char courseNums[][MAXCHAR], int students[], int count){
-
+void cancelCourses(char courseNums[][MAXCHAR], int students[], int &count){
+    for (int i = 0; i < count; i++){
+        if(students[i] < 10){
+            for(int j = i; j < count; j++){
+                students[j] = students[j + 1];
+                strcpy(courseNums[j], courseNums[j + 1]);
+                // students[count - 1] = '\0';
+                // strcpy(courseNums[j - 1], '\0');
+            }
+            --count;
+            i--;
+        }
+    }
 }
