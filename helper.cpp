@@ -55,8 +55,10 @@ void readInt(const char prompt[], int &num){
             loopState = true;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } else if (num < 0 || num > 25){
+            cout << "Input is out of bounds. Please enter a number betewen 0 and 25: ";
+            loopState = true;
         }
-
     }while(loopState);
 }
 
